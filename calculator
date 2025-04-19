@@ -1,0 +1,153 @@
+calculator
+html;
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator">
+        <div class="screen">
+            <input type="text" id="display" disabled>
+        </div>
+        <div class="buttons">
+            <button class="btn operator" onclick="clearDisplay()">C</button>
+            <button class="btn operator" onclick="deleteLast()">⌫</button>
+            <button class="btn operator" onclick="appendCharacter('%')">%</button>
+            <button class="btn operator" onclick="appendCharacter('/')">÷</button>
+
+            <button class="btn" onclick="appendCharacter('7')">7</button>
+            <button class="btn" onclick="appendCharacter('8')">8</button>
+            <button class="btn" onclick="appendCharacter('9')">9</button>
+            <button class="btn operator" onclick="appendCharacter('*')">×</button>
+
+            <button class="btn" onclick="appendCharacter('4')">4</button>
+            <button class="btn" onclick="appendCharacter('5')">5</button>
+            <button class="btn" onclick="appendCharacter('6')">6</button>
+            <button class="btn operator" onclick="appendCharacter('-')">−</button>
+
+            <button class="btn" onclick="appendCharacter('1')">1</button>
+            <button class="btn" onclick="appendCharacter('2')">2</button>
+            <button class="btn" onclick="appendCharacter('3')">3</button>
+            <button class="btn operator" onclick="appendCharacter('+')">+</button>
+
+            <button class="btn zero" onclick="appendCharacter('0')">0</button>
+            <button class="btn" onclick="appendCharacter('.')">.</button>
+            <button class="btn equals" onclick="calculateResult()">=</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+JS;
+let display = document.getElementById("display");
+
+function appendCharacter(char) {
+    display.value += char;
+}
+
+function clearDisplay() {
+    display.value = "";
+}
+
+function deleteLast() {
+    display.value = display.value.slice(0, -1);
+}
+
+function calculateResult() {
+    try {
+        display.value = eval(display.value);
+    } catch (e) {
+        display.value = "Error";
+    }
+}
+
+CSS;
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+body {
+    background: #0f0f0f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.calculator {
+    background: #222;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px #0ff;
+    text-align: center;
+}
+
+.screen input {
+    width: 100%;
+    height: 60px;
+    font-size: 2rem;
+    text-align: right;
+    background: black;
+    color: #0ff;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 10px #0ff;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn {
+    font-size: 1.5rem;
+    padding: 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: black;
+    color: #0ff;
+    box-shadow: 0px 0px 10px #0ff;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #0ff;
+    color: black;
+    box-shadow: 0px 0px 15px #0ff;
+}
+
+.operator {
+    color: #f00;
+    box-shadow: 0px 0px 10px #f00;
+}
+
+.operator:hover {
+    background: #f00;
+    color: black;
+    box-shadow: 0px 0px 15px #f00;
+}
+
+.equals {
+    grid-column: span 2;
+    background: #00ff00;
+    box-shadow: 0px 0px 10px #00ff00;
+    color: black;
+}
+
+.equals:hover {
+    background: black;
+    color: #00ff00;
+    box-shadow: 0px 0px 15px #00ff00;
+}
+
+.zero {
+    grid-column: span 2;
+}
